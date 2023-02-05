@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Weather app</title>
+      <link href="https://fonts.googleapis.com/css2?family=Popins&display=swap" rel="stylesheet">
+      <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="api.css">
+    </head>
+    <body>
+      <div class="container">
+        <div class="card">
+     <h2><i class="fa fa-map-marker"></i><span id="location"></span></h2>
+     <h6 id="weather"></h6>
+     <h4><span id="temp"></span><sup>o</sup>C</h4>
+     <img src="" id="icon">
+     <button onclick="window.location.reload()" class="refresh"><i class="fa fa-refresh"></i></button>
+        
+        </div>
+     </div>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
+    <script>
+      link= "https://api.openweathermap.org/data/2.5/weather?q=gorakhpur&appid=1ff7f45d7737c3a8a6a25808992c1074";
+      var request = new XMLHttpRequest();
+      request.open('GET',link,true);
+      request.onload= function(){
+        var obj = JSON.parse(this.response);
+        console.log(obj);
+        document.getElementById('weather').innerHTML = obj.weather[0].description;
+        document.getElementById('location').innerHTML = obj.name;
+        document.getElementById('temp').innerHTML = Math.round(obj.main.temp - 273.15);
+        document.getElementById('icon').src = "https://openweathermap.org/img/w/"+ obj.weather[0].icon + ".png";
+      }
+      if(request.status>=200 && request.status < 400){
+       var temp= obj.main.temp; 
+      }
+      else{
+        console.log("This city data is not available");
+      }
+      request.send();
+    </script>
+   </html>
